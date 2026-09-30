@@ -110,6 +110,7 @@ h1,h2,h3{font-family:"Inter Tight",Inter,sans-serif;color:var(--ink);font-weight
 .bigfact{font:600 clamp(64px,8vw,104px)/.95 "Inter Tight",sans-serif;letter-spacing:-.04em;color:var(--ink);font-variant-numeric:lining-nums;text-wrap:balance}
 .bigfact-cap{margin-top:18px;font:500 clamp(24px,2.6vw,30px)/1.3 "Inter Tight",sans-serif;color:var(--body-strong);letter-spacing:-.01em;max-width:17ch}
 .bigfact-note{margin-top:18px;font-size:18px;color:var(--muted);max-width:34ch}
+.fact-cta{margin-top:34px}
 .problem h2{font-size:clamp(32px,3.6vw,42px)}
 .rows{list-style:none;margin-top:34px;border-top:1px solid var(--hairline)}
 .rows li{display:grid;grid-template-columns:56px 1fr;gap:10px;padding:26px 0;border-bottom:1px solid var(--hairline)}
@@ -140,10 +141,10 @@ h1,h2,h3{font-family:"Inter Tight",Inter,sans-serif;color:var(--ink);font-weight
 
 /* host */
 .host{background:var(--soft);border-top:1px solid var(--hairline)}
-.host-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}
-.host .bezel{border-radius:32px;transform:rotate(-1.2deg)}
+.host-grid{display:grid;grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);gap:80px;align-items:center}
+.host .bezel{border-radius:32px;transform:rotate(-1.2deg);width:100%;max-width:440px;justify-self:center}
 .host .bezel-core{border-radius:23px}
-.host img{width:100%;aspect-ratio:1040/860;object-fit:cover}
+.host img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 20%}
 .host h2{font-size:clamp(34px,4vw,48px)}
 .host .story{margin-top:24px;font-size:21px}
 .host .story + .story{margin-top:16px}
@@ -164,7 +165,7 @@ h1,h2,h3{font-family:"Inter Tight",Inter,sans-serif;color:var(--ink);font-weight
 
 /* close, footer folded in */
 .close{padding:112px 0 0;background:var(--lit-cream);text-align:center;border-top:1px solid var(--hairline)}
-.close h2{margin-top:22px;font-size:clamp(36px,4.6vw,56px);max-width:20ch;margin-inline:auto}
+.close h2{margin-top:22px;font-size:clamp(36px,4.6vw,56px);max-width:24ch;margin-inline:auto}
 .close h2 .em{display:block}
 .close .cta-row{margin-top:40px}
 .foot{margin-top:104px;padding:34px 0 40px;border-top:1px solid var(--hairline);font-size:15px;color:var(--muted);text-align:center;line-height:1.6}
@@ -208,7 +209,7 @@ dialog::backdrop{background:rgba(20,20,19,.5);backdrop-filter:blur(4px)}
   .problem-grid,.host-grid{grid-template-columns:1fr;gap:48px}
   .rail{grid-template-columns:1fr 1fr;row-gap:48px}
   .rail::before{display:none}
-  .host .bezel{transform:none;max-width:640px}
+  .host .bezel{transform:none;max-width:420px}
 }
 @media (max-width:640px){
   body{font-size:19px}
@@ -297,6 +298,10 @@ dialog::backdrop{background:rgba(20,20,19,.5);backdrop-filter:blur(4px)}
         <div class="bigfact">1.8 million</div>
         <p class="bigfact-cap">people are losing their Medicare Advantage plans in 2027.</p>
         <p class="bigfact-note">If yours is one of them, you will need to choose a new plan. That means new questions, new paperwork and new decisions.</p>
+        <div class="fact-cta">
+          <button class="cta js-open" type="button">Book My Medicare Review<span class="ico"><svg width="22" height="22"><use href="#arrow"/></svg></span></button>
+          <p class="risk"><b>Zoom or Google Meet</b> · In sign language</p>
+        </div>
       </div>
       <div class="rv">
         <h2>Most Medicare help was never built for you.</h2>
@@ -339,7 +344,7 @@ dialog::backdrop{background:rgba(20,20,19,.5);backdrop-filter:blur(4px)}
 
   <section class="section host">
     <div class="wrap host-grid">
-      <div class="bezel rv"><div class="bezel-core"><img src="assets/justin-portrait.jpg" width="1040" height="860" alt="Justin Gray signing in his office, seated in a leather chair in front of a large green plant and a sunny window"></div></div>
+      <div class="bezel rv"><div class="bezel-core"><img src="assets/justin-headshot.jpg" width="1040" height="1300" alt="Justin Gray smiling, in a navy blazer, checked shirt and red tie"></div></div>
       <div class="rv">
         <h2>Hi, I'm Justin Gray.</h2>
         <p class="story">My dad is Deaf, so I've been signing for many years. Now I use sign language to help people understand their Medicare.</p>
