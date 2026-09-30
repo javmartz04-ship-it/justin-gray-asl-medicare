@@ -423,12 +423,14 @@ dialog::backdrop{background:rgba(20,20,19,.5);backdrop-filter:blur(4px)}
 <script>
 /* ============================================================
    SETTINGS
-   WEBHOOK_URL: paste the GHL inbound webhook (or leave empty).
-   Empty = safe preview mode: the form validates and moves on to
-   the booking page, but nothing is sent anywhere.
+   WEBHOOK_URL: the GHL inbound webhook. Every lead is posted as
+   flat JSON (see NOTES.md for the field map). Empty, or ?preview=1
+   on the page URL, = safe preview: validates and moves on to the
+   booking page, sends nothing.
    BOOKING_PAGE: where step 2 lives.
    ============================================================ */
-const WEBHOOK_URL = '';
+const WEBHOOK_URL = 'https://services.leadconnectorhq.com/hooks/Y0phrRImWl9s8ESmR6Zj/webhook-trigger/a7cb0ef7-21f0-4bdf-bcb6-88b4162127db';
+const PREVIEW = new URLSearchParams(location.search).has('preview');
 const BOOKING_PAGE = 'book.html';
 
 document.getElementById('yr').textContent = new Date().getFullYear();
@@ -476,19 +478,46 @@ form.addEventListener('submit', async e => {
     if (!good && !first) first = el;
   }
   if (first) { first.focus(); return; }
-  const data = { name: form.elements.name.value.trim(), phone: form.elements.phone.value.trim(), email: form.elements.email.value.trim(), source: 'asl-medicare-optin' };
-  const btn = form.querySelector('button[type=submit]'); btn.disabled = true;
-  if (WEBHOOK_URL) {
-    try { await fetch(WEBHOOK_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) }); } catch (err) {}
+  const full = form.elements.name.value.trim().replace(/\s+/g, ' ');
+  const parts = full.split(' ');
+  const qs = new URLSearchParams(location.search);
+  const data = {
+    first_name: parts[0], last_name: parts.slice(1).join(' '), full_name: full,
+    phone: form.elements.phone.value.trim(), email: form.elements.email.value.trim(),
+    source: 'asl-medicare-optin', page_url: location.origin + location.pathname,
+    submitted_at: new Date().toISOString()
+  };
+  ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'fbclid'].forEach(k => { if (qs.get(k)) data[k] = qs.get(k).slice(0, 200); });
+  data.summary = 'ASL Medicare opt-in: ' + full + ' | ' + data.phone + ' | ' + data.email + (data.utm_campaign ? ' | campaign: ' + data.utm_campaign : '');
+
+  const btn = form.querySelector('button[type=submit]'), label = btn.firstChild;
+  btn.disabled = true; label.textContent = 'One Moment…';
+  let sent = false;
+  if (WEBHOOK_URL && !PREVIEW) {
+    for (let attempt = 0; attempt < 2 && !sent; attempt++) {
+      try {
+        const r = await fetch(WEBHOOK_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
+        const txt = await r.text();
+        sent = r.ok && /success/i.test(txt) && !/error/i.test(txt);   // GHL answers 200 even when it rejects a body
+      } catch (err) {}
+    }
   }
-  try { sessionStorage.setItem('jg-first', data.name.split(/\s+/)[0]); } catch (err) {}
-  location.href = BOOKING_PAGE;
+  // Never strand the visitor: the calendar asks for the same details, so step 2 opens either way.
+  try {
+    sessionStorage.setItem('jg-first', data.first_name);
+    sessionStorage.setItem('jg-lead', JSON.stringify({ first_name: data.first_name, last_name: data.last_name, email: data.email, phone: data.phone }));
+    if (!sent && WEBHOOK_URL && !PREVIEW) localStorage.setItem('jg-unsent', JSON.stringify(data));
+  } catch (err) {}
+  location.href = BOOKING_PAGE + (PREVIEW ? '?preview=1' : '');
 });
 
 /* phone dock: on after the hero CTA scrolls away, off over the closing CTA */
 const dock = document.getElementById('dock'), heroCta = document.querySelector('.hero .cta-row'), closeSec = document.querySelector('.close');
 const dockCheck = () => dock.classList.toggle('on', heroCta.getBoundingClientRect().bottom < 0 && closeSec.getBoundingClientRect().top > innerHeight - 40);
 addEventListener('scroll', dockCheck, { passive: true }); dockCheck();
+
+/* back button from step 2: bfcache restores a disabled button */
+addEventListener('pageshow', () => { const b = form.querySelector('button[type=submit]'); b.disabled = false; b.firstChild.textContent = 'Next: Pick a Time'; });
 
 /* arrival reveals */
 const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .14 });
