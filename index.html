@@ -1,0 +1,493 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Medicare Help in Sign Language | Justin Gray</title>
+<meta name="description" content="Medicare questions? Meet Justin Gray, an ASL-certified Medicare agent, face to face on Zoom or Google Meet. We go through your medicines, your doctors, your costs and your benefits together.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Tokens: neutrals from reference/design-systems/claude (warm cream ramp).
+   Accent: the fiddle-leaf green behind Justin in both ads, deepened until white
+   text on it passes AA (7.6:1). One accent. It lives on the emphasis lines, the
+   CTA, eyebrow ticks and focus states. Nowhere else. */
+:root{
+  --canvas:#faf9f5; --soft:#f5f0e8; --card:#efe9de; --cream-strong:#e8e0d2;
+  --hairline:#e6dfd8; --ink:#141413; --body-strong:#252523; --body:#3d3d3a;
+  --muted:#5f5d57; --dark:#181715;
+  --accent:#2e5e3e; --accent-hover:#244b31; --accent-text:#2e5e3e;
+  --accent-glow:rgba(46,94,62,.30);
+  --lit-paper:radial-gradient(122% 78% at 50% -14%,#fff,#fcfbf8 40%,#f5f1ea);
+  --lit-cream:radial-gradient(128% 82% at 50% -16%,#fff,#faf7f1 36%,#f1ebe1 74%,#ebe4d8);
+  --ease:cubic-bezier(.22,1,.36,1);
+  --r-card:22px; --r-pill:999px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{background:var(--canvas);color:var(--body);font:400 20px/1.6 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+img,video{display:block;max-width:100%;height:auto}
+h1,h2,h3{font-family:"Inter Tight",Inter,sans-serif;color:var(--ink);font-weight:600;letter-spacing:-.02em;line-height:1.08;font-variant-numeric:lining-nums;text-wrap:balance}
+.em{color:var(--accent-text)}
+.wrap{width:min(1180px,100% - 40px);margin-inline:auto}
+.narrow{width:min(860px,100% - 40px);margin-inline:auto}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:8px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* eyebrow: muted caps with the accent tick */
+.eyebrow{display:inline-flex;align-items:center;gap:12px;font:600 13.5px/1 Inter,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.eyebrow::before{content:"";width:22px;height:3px;border-radius:3px;background:var(--accent)}
+
+/* CTA: button-in-button with a kinetic arrow */
+.cta{display:inline-flex;align-items:center;gap:16px;min-height:68px;padding:10px 12px 10px 38px;border:0;border-radius:var(--r-pill);
+  background:var(--accent);color:#fff;font:600 21px/1.2 "Inter Tight",Inter,sans-serif;letter-spacing:-.005em;cursor:pointer;text-decoration:none;
+  box-shadow:0 14px 34px -12px var(--accent-glow),inset 0 1px 0 rgba(255,255,255,.18);transition:transform .5s var(--ease),background .3s var(--ease),box-shadow .5s var(--ease)}
+.cta .ico{display:grid;place-items:center;width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,.16);transition:transform .5s var(--ease)}
+.cta:hover{background:var(--accent-hover);transform:translateY(-2px);box-shadow:0 20px 44px -14px var(--accent-glow),inset 0 1px 0 rgba(255,255,255,.18)}
+.cta:hover .ico{transform:translateX(4px)}
+.cta:active{transform:translateY(0) scale(.99)}
+.risk{margin-top:16px;font-size:17px;color:var(--muted)}
+.risk b{color:var(--body-strong);font-weight:600}
+
+/* top plate: wordmark + the one CTA. no links. */
+.plate{position:sticky;top:14px;z-index:20;margin:14px auto 0;width:min(1180px,100% - 28px);display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:10px 10px 10px 24px;border-radius:var(--r-pill);background:rgba(250,249,245,.82);backdrop-filter:saturate(1.4) blur(14px);-webkit-backdrop-filter:saturate(1.4) blur(14px);
+  border:1px solid rgba(20,20,19,.07);box-shadow:0 12px 30px -18px rgba(20,20,19,.18)}
+.mark{display:flex;align-items:center;gap:12px;color:var(--ink)}
+.mark .seal{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--accent);color:#fff}
+.mark b{display:block;font:600 19px/1.1 "Inter Tight",sans-serif;letter-spacing:-.01em}
+.mark small{display:block;font-size:14px;color:var(--muted);line-height:1.2}
+.plate .cta{min-height:54px;font-size:17px;padding:7px 8px 7px 24px;gap:12px}
+.plate .cta .ico{width:40px;height:40px}
+
+/* hero */
+.hero{position:relative;padding:72px 0 96px;background:var(--lit-paper);overflow:hidden;text-align:center}
+.hero::before{content:"";position:absolute;inset:-20% -10% auto;height:760px;pointer-events:none;
+  background:radial-gradient(40% 50% at 22% 30%,rgba(46,94,62,.13),transparent 70%),radial-gradient(38% 46% at 80% 22%,rgba(204,168,112,.16),transparent 70%)}
+.hero > *{position:relative}
+.hero h1{margin:24px auto 0;font-size:clamp(40px,5vw,60px);max-width:19ch}
+.hero h1 .em{display:block}
+.lede{margin:24px auto 0;max-width:50ch;font-size:clamp(20px,2.1vw,23px);line-height:1.55;color:var(--body)}
+.lede b{color:var(--body-strong);font-weight:600}
+
+/* video: double bezel */
+.bezel{padding:10px;border-radius:30px;background:linear-gradient(180deg,rgba(255,255,255,.9),rgba(239,233,222,.7));border:1px solid rgba(20,20,19,.07);
+  box-shadow:0 40px 90px -40px rgba(20,20,19,.35),inset 0 1px 0 #fff}
+.bezel-core{position:relative;border-radius:21px;overflow:hidden;background:#1a1712;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
+.player{width:min(900px,100%);margin:40px auto 0}
+.player video{width:100%;aspect-ratio:16/9;object-fit:cover}
+.play{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;border:0;cursor:pointer;
+  background:linear-gradient(180deg,rgba(10,9,7,.10),rgba(10,9,7,.34));color:#fff;font:600 19px/1.2 "Inter Tight",sans-serif;transition:background .4s var(--ease)}
+.play:hover{background:linear-gradient(180deg,rgba(10,9,7,.05),rgba(10,9,7,.26))}
+.play .disc{position:relative;display:grid;place-items:center;width:96px;height:96px;border-radius:50%;background:var(--accent);box-shadow:0 18px 40px -12px rgba(0,0,0,.5);transition:transform .5s var(--ease)}
+.play .disc::after{content:"";position:absolute;inset:-10px;border-radius:50%;border:2px solid rgba(255,255,255,.55);animation:ripple 2.4s var(--ease) infinite}
+.play:hover .disc{transform:scale(1.06)}
+.play .label{padding:9px 18px;border-radius:var(--r-pill);background:rgba(10,9,7,.55);backdrop-filter:blur(6px)}
+@keyframes ripple{0%{transform:scale(.9);opacity:.9}100%{transform:scale(1.35);opacity:0}}
+.player-cap{margin-top:16px;font-size:16px;color:var(--muted)}
+.chip{position:absolute;top:16px;left:16px;z-index:3;display:flex;align-items:center;gap:10px;padding:9px 16px;border-radius:var(--r-pill);background:rgba(250,249,245,.94);color:var(--ink);font:600 14px/1 Inter,sans-serif;letter-spacing:.12em;text-transform:uppercase;box-shadow:0 10px 24px -12px rgba(0,0,0,.45);transition:opacity .4s var(--ease)}
+.chip i{width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px rgba(46,94,62,.2)}
+.player.playing .chip,.player.playing .play{opacity:0;pointer-events:none}
+.play{transition:opacity .4s var(--ease),background .4s var(--ease)}
+.bar{position:absolute;left:0;right:0;bottom:0;z-index:3;height:6px;background:rgba(255,255,255,.22);opacity:0;transition:opacity .4s var(--ease)}
+.bar span{display:block;height:100%;width:0;background:var(--accent)}
+.player.started .bar{opacity:1}
+.hold{position:absolute;inset:0;z-index:2;display:none;place-items:center;border:0;background:transparent;cursor:pointer}
+.player.started .hold{display:grid}
+.hold .pz{display:grid;place-items:center;width:84px;height:84px;border-radius:50%;background:rgba(10,9,7,.55);backdrop-filter:blur(6px);opacity:0;transition:opacity .3s var(--ease)}
+.player.started.paused .hold .pz{opacity:1}
+.endcard{position:absolute;inset:0;z-index:4;display:grid;place-items:center;align-content:center;gap:18px;padding:24px;text-align:center;background:linear-gradient(rgba(20,20,19,.66),rgba(20,20,19,.78)),url(assets/intro-poster.jpg) center/cover;opacity:0;pointer-events:none;transition:opacity .5s var(--ease)}
+.player.ended .endcard{opacity:1;pointer-events:auto}
+.endcard p{color:#fff;font:600 clamp(22px,2.6vw,30px)/1.2 "Inter Tight",sans-serif;letter-spacing:-.01em}
+.again{border:0;background:none;color:rgba(255,255,255,.85);font:500 17px/1 Inter,sans-serif;text-decoration:underline;text-underline-offset:4px;cursor:pointer;padding:8px}
+.hero .cta-row{margin-top:40px}
+
+/* problem */
+.section{padding:104px 0}
+.problem{background:var(--canvas)}
+.problem-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:72px;align-items:start}
+.bigfact{font:600 clamp(64px,8vw,104px)/.95 "Inter Tight",sans-serif;letter-spacing:-.04em;color:var(--ink);font-variant-numeric:lining-nums;text-wrap:balance}
+.bigfact-cap{margin-top:18px;font:500 clamp(24px,2.6vw,30px)/1.3 "Inter Tight",sans-serif;color:var(--body-strong);letter-spacing:-.01em;max-width:17ch}
+.bigfact-note{margin-top:18px;font-size:18px;color:var(--muted);max-width:34ch}
+.problem h2{font-size:clamp(32px,3.6vw,42px)}
+.rows{list-style:none;margin-top:34px;border-top:1px solid var(--hairline)}
+.rows li{display:grid;grid-template-columns:56px 1fr;gap:10px;padding:26px 0;border-bottom:1px solid var(--hairline)}
+.num{font:600 17px/1.6 "Inter Tight",sans-serif;color:var(--muted);font-variant-numeric:tabular-nums lining-nums}
+.rows h3{font-size:23px;letter-spacing:-.01em;line-height:1.3}
+.rows p{margin-top:6px;font-size:19px}
+
+/* reframe */
+.reframe{padding:112px 0;background:var(--lit-cream);text-align:center;border-block:1px solid var(--hairline)}
+.reframe h2{font-size:clamp(36px,4.6vw,56px);max-width:21ch;margin-inline:auto}
+.reframe h2 .em{display:block}
+.reframe p{margin:28px auto 0;max-width:44ch;font-size:21px}
+
+/* mechanism: four stages across on a rail */
+.mech-head{text-align:center}
+.mech-head h2{margin-top:22px;font-size:clamp(34px,4vw,48px)}
+.mech-head p{margin:20px auto 0;max-width:46ch;font-size:21px}
+.rail{position:relative;list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:64px}
+.rail::before{content:"";position:absolute;top:31px;left:12%;right:12%;height:2px;background:linear-gradient(90deg,transparent,var(--cream-strong) 8%,var(--cream-strong) 92%,transparent)}
+.stage{position:relative;text-align:center;padding:0 8px}
+.stage .dot{position:relative;display:grid;place-items:center;margin:0 auto;width:64px;height:64px;border-radius:50%;background:#fff;border:1px solid var(--hairline);
+  box-shadow:0 12px 26px -14px rgba(20,20,19,.25);font:600 20px/1 "Inter Tight",sans-serif;color:var(--ink);font-variant-numeric:tabular-nums lining-nums}
+.stage:first-child .dot{background:var(--accent);border-color:var(--accent);color:#fff}
+.stage h3{margin-top:24px;font-size:25px}
+.stage p{margin-top:10px;font-size:18.5px;line-height:1.55}
+.mech-foot{margin-top:64px;text-align:center}
+.mech-foot .why{max-width:44ch;margin:0 auto 34px;font:500 22px/1.45 "Inter Tight",sans-serif;color:var(--body-strong);letter-spacing:-.01em}
+
+/* host */
+.host{background:var(--soft);border-top:1px solid var(--hairline)}
+.host-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}
+.host .bezel{border-radius:32px;transform:rotate(-1.2deg)}
+.host .bezel-core{border-radius:23px}
+.host img{width:100%;aspect-ratio:1040/860;object-fit:cover}
+.host h2{font-size:clamp(34px,4vw,48px)}
+.host .story{margin-top:24px;font-size:21px}
+.host .story + .story{margin-top:16px}
+.facts{list-style:none;margin-top:34px;display:grid;gap:14px}
+.facts li{display:flex;gap:14px;align-items:flex-start;font-size:19px;color:var(--body-strong)}
+.facts svg{flex:none;margin-top:5px}
+
+/* qualification: one grid, two sides */
+.qual h2{text-align:center;font-size:clamp(34px,4vw,46px)}
+.qual-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:52px}
+.side{padding:8px;border-radius:28px;background:linear-gradient(180deg,#fff,var(--soft));border:1px solid var(--hairline);box-shadow:0 20px 50px -30px rgba(20,20,19,.2)}
+.side-core{height:100%;padding:34px 34px 30px;border-radius:21px;background:#fff;box-shadow:inset 0 1px 0 #fff,inset 0 0 0 1px rgba(20,20,19,.04)}
+.side.no .side-core{background:var(--canvas)}
+.side h3{font-size:24px}
+.side ul{list-style:none;margin-top:20px;display:grid;gap:16px}
+.side li{display:grid;grid-template-columns:30px 1fr;gap:10px;font-size:19px;line-height:1.5}
+.side li svg{margin-top:4px}
+
+/* close, footer folded in */
+.close{padding:112px 0 0;background:var(--lit-cream);text-align:center;border-top:1px solid var(--hairline)}
+.close h2{margin-top:22px;font-size:clamp(36px,4.6vw,56px);max-width:20ch;margin-inline:auto}
+.close h2 .em{display:block}
+.close .cta-row{margin-top:40px}
+.foot{margin-top:104px;padding:34px 0 40px;border-top:1px solid var(--hairline);font-size:15px;color:var(--muted);text-align:center;line-height:1.6}
+.foot .mark{justify-content:center;margin-bottom:16px}
+.foot p + p{margin-top:6px}
+
+/* phone dock: the one action stays in reach after the first screen */
+.dock{display:none;position:fixed;left:12px;right:12px;bottom:12px;z-index:30;transform:translateY(140%);transition:transform .6s var(--ease)}
+.dock.on{transform:none}
+.dock .cta{box-shadow:0 18px 40px -12px rgba(20,20,19,.45)}
+
+/* form dialog: centered on desktop, bottom sheet on phones */
+dialog{margin:auto;border:0;padding:0;background:transparent;width:min(560px,100% - 28px);max-height:calc(100dvh - 28px);overflow:visible}
+dialog::backdrop{background:rgba(20,20,19,.5);backdrop-filter:blur(4px)}
+.sheet{padding:9px;border-radius:32px;background:linear-gradient(180deg,#fff,var(--card));border:1px solid rgba(255,255,255,.6);box-shadow:0 50px 120px -30px rgba(0,0,0,.45)}
+.sheet-core{position:relative;padding:38px 34px 30px;border-radius:24px;background:#fff;overflow:auto;max-height:calc(100dvh - 48px)}
+.sheet .step{font:600 14px/1 Inter,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-text)}
+.sheet h2{margin-top:14px;font-size:clamp(28px,4vw,34px)}
+.sheet .sub{margin-top:10px;font-size:18px;color:var(--muted)}
+.x{position:absolute;top:16px;right:16px;display:grid;place-items:center;width:48px;height:48px;border-radius:50%;border:1px solid var(--hairline);background:#fff;cursor:pointer;color:var(--ink)}
+.field{margin-top:22px}
+.field label{display:block;font:600 18px/1.3 Inter,sans-serif;color:var(--ink)}
+.field input{margin-top:8px;width:100%;min-height:62px;padding:14px 18px;border-radius:16px;border:2px solid var(--cream-strong);background:var(--canvas);font:400 21px/1.3 Inter,sans-serif;color:var(--ink);transition:border-color .2s,background .2s}
+.field input:focus{outline:0;border-color:var(--accent);background:#fff;box-shadow:0 0 0 4px rgba(46,94,62,.14)}
+.field .err{display:none;margin-top:8px;font-size:16px;color:#a3372b;font-weight:500}
+.field.bad input{border-color:#c64545}
+.field.bad .err{display:block}
+.sheet .cta{width:100%;justify-content:space-between;margin-top:30px}
+.sheet .risk{text-align:center;font-size:16px}
+
+/* reveal: arrival only, nothing on body copy */
+.rv{opacity:0;transform:translateY(18px);filter:blur(6px);transition:opacity .9s var(--ease),transform .9s var(--ease),filter .9s var(--ease)}
+.rv.in{opacity:1;transform:none;filter:none}
+.hero .ln{display:block;opacity:0;transform:translateY(22px);animation:rise 1s var(--ease) forwards}
+.hero .ln:nth-child(2){animation-delay:.14s}
+@keyframes rise{to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv,.hero .ln{opacity:1;transform:none;filter:none}}
+
+/* responsive */
+@media (max-width:980px){
+  .problem-grid,.host-grid{grid-template-columns:1fr;gap:48px}
+  .rail{grid-template-columns:1fr 1fr;row-gap:48px}
+  .rail::before{display:none}
+  .host .bezel{transform:none;max-width:640px}
+}
+@media (max-width:640px){
+  body{font-size:19px}
+  .plate{justify-content:center;padding:10px 16px}
+  .plate .cta{display:none}
+  .eyebrow{font-size:12.5px;letter-spacing:.12em}
+  .dock{display:block}
+  .hero{padding:64px 0 72px}
+  .player{margin-top:36px}
+  .bezel{padding:6px;border-radius:22px}
+  .bezel-core{border-radius:17px}
+  .play .disc{width:78px;height:78px}
+  .play .label{font-size:16px}
+  .section{padding:80px 0}
+  .reframe,.close{padding-top:84px}
+  .reframe{padding-bottom:84px}
+  .rail{grid-template-columns:1fr;row-gap:0;margin-top:44px}
+  .stage{display:grid;grid-template-columns:64px 1fr;gap:18px;text-align:left;padding:0 0 32px}
+  .stage .dot{margin:0}
+  .stage h3{margin-top:14px}
+  .qual-grid{grid-template-columns:1fr}
+  .side-core{padding:28px 24px}
+  .cta{font-size:19px;padding-left:28px;width:100%;justify-content:space-between}
+  .plate .cta{width:auto}
+  dialog{width:100%;max-width:100%;margin:auto 0 0;max-height:100dvh}
+  .sheet{border-radius:28px 28px 0 0;padding:6px 6px 0}
+  .sheet-core{border-radius:22px 22px 0 0;padding:34px 22px 28px;max-height:calc(100dvh - 20px)}
+  .foot{margin-top:84px}
+  .endcard{gap:10px;padding:12px}
+  .endcard p{display:none}
+  .endcard .cta{width:auto;min-height:56px;font-size:17px;padding:6px 8px 6px 22px;gap:12px}
+  .endcard .cta .ico{width:40px;height:40px}
+  .again{font-size:15px}
+  .chip{top:10px;left:10px;font-size:12px;padding:7px 12px}
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="arrow" viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="hand" viewBox="0 0 24 24"><path d="M8 13V5.5a1.5 1.5 0 0 1 3 0V11m0-6.5V4a1.5 1.5 0 0 1 3 0v7m0-5.5a1.5 1.5 0 0 1 3 0V13m0-4.5a1.5 1.5 0 0 1 3 0V15a7 7 0 0 1-7 7h-1a7 7 0 0 1-5.6-2.8L3.8 16a1.6 1.6 0 0 1 2.4-2.1L8 15.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="#2e5e3e"/><path d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="cross" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="#e8e0d2"/><path d="M8.5 8.5l7 7M15.5 8.5l-7 7" fill="none" stroke="#5f5d57" stroke-width="2" stroke-linecap="round"/></symbol>
+</svg>
+
+<header class="plate">
+  <div class="mark"><span class="seal"><svg width="22" height="22"><use href="#hand"/></svg></span><span><b>Justin Gray</b><small>ASL Medicare Agent</small></span></div>
+  <button class="cta js-open" type="button">Book My Medicare Review<span class="ico"><svg width="20" height="20"><use href="#arrow"/></svg></span></button>
+</header>
+
+<main id="page">
+  <section class="hero">
+    <div class="wrap">
+      <span class="eyebrow">Medicare help in American Sign Language</span>
+      <h1><span class="ln">Medicare Questions?</span><span class="ln em">Let's Talk in Sign Language.</span></h1>
+      <p class="lede">I'm Justin Gray, an ASL-certified Medicare agent. We meet face to face on Zoom and go through <b>your doctors, your medicines, your costs and your benefits</b> together.</p>
+
+      <div class="player bezel" id="player">
+        <div class="bezel-core">
+          <video id="intro" poster="assets/intro-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Justin Gray explains how he helps with Medicare, in sign language with captions">
+            <source src="assets/intro-video.mp4" type="video/mp4">
+          </video>
+          <span class="chip"><i></i>Press Play · 0:46</span>
+          <button class="play" id="play" type="button"><span class="disc"><svg width="34" height="34" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="#fff"/></svg></span><span class="label">Watch Justin's Video</span></button>
+          <button class="hold" id="hold" type="button" aria-label="Pause or play the video"><span class="pz"><svg width="30" height="30" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="#fff"/></svg></span></button>
+          <div class="bar" aria-hidden="true"><span id="prog"></span></div>
+          <div class="endcard">
+            <p>Ready to go through your Medicare?</p>
+            <button class="cta js-open" type="button">Book My Medicare Review<span class="ico"><svg width="22" height="22"><use href="#arrow"/></svg></span></button>
+            <button class="again" id="again" type="button">Watch Again</button>
+          </div>
+        </div>
+      </div>
+      <p class="player-cap">Signed and captioned. No sound needed.</p>
+
+      <div class="cta-row">
+        <button class="cta js-open" type="button">Book My Medicare Review<span class="ico"><svg width="22" height="22"><use href="#arrow"/></svg></span></button>
+        <p class="risk"><b>Zoom or Google Meet</b> · In sign language · Bring your own interpreter if you like</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section problem">
+    <div class="wrap problem-grid">
+      <div class="rv">
+        <div class="bigfact">1.8 million</div>
+        <p class="bigfact-cap">people are losing their Medicare Advantage plans in 2027.</p>
+        <p class="bigfact-note">If yours is one of them, you will need to choose a new plan. That means new questions, new paperwork and new decisions.</p>
+      </div>
+      <div class="rv">
+        <h2>Most Medicare help was never built for you.</h2>
+        <ol class="rows">
+          <li><span class="num">01</span><div><h3>It happens on the phone.</h3><p>Fast, spoken, and hard to follow when you are Deaf or hard of hearing.</p></div></li>
+          <li><span class="num">02</span><div><h3>Interpreters don't always know Medicare.</h3><p>They can sign the words, but the plan details still get lost.</p></div></li>
+          <li><span class="num">03</span><div><h3>Plans get sold on the extras.</h3><p>Nice benefits on paper, while your doctor or your medicine gets left out.</p></div></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="reframe">
+    <div class="narrow rv">
+      <h2>Medicare isn't the hard part. <span class="em">Being understood is.</span></h2>
+      <p>When your agent signs, you can ask every question in your own language, see every answer, and choose with confidence.</p>
+    </div>
+  </section>
+
+  <section class="section mech">
+    <div class="wrap">
+      <div class="mech-head rv">
+        <span class="eyebrow">The Medicare Order of Operations</span>
+        <h2>Four steps, in the same order, every time.</h2>
+        <p>On our call we look at your Medicare in this order, so nothing important gets skipped.</p>
+      </div>
+      <ol class="rail rv">
+        <li class="stage"><span class="dot">01</span><div><h3>Your Medicines</h3><p>We check that every medicine you take is covered.</p></div></li>
+        <li class="stage"><span class="dot">02</span><div><h3>Your Doctors</h3><p>We make sure you can keep seeing the doctors you trust.</p></div></li>
+        <li class="stage"><span class="dot">03</span><div><h3>Your Costs</h3><p>We look at what you could pay out of pocket in a year.</p></div></li>
+        <li class="stage"><span class="dot">04</span><div><h3>Your Benefits</h3><p>Then the extras. Never at the cost of steps one to three.</p></div></li>
+      </ol>
+      <div class="mech-foot rv">
+        <p class="why">Your benefits should never come at the expense of your doctors or your medicines.</p>
+        <button class="cta js-open" type="button">Book My Medicare Review<span class="ico"><svg width="22" height="22"><use href="#arrow"/></svg></span></button>
+        <p class="risk"><b>Zoom or Google Meet</b> · In sign language · Bring your own interpreter if you like</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section host">
+    <div class="wrap host-grid">
+      <div class="bezel rv"><div class="bezel-core"><img src="assets/justin-portrait.jpg" width="1040" height="860" alt="Justin Gray signing in his office, seated in a leather chair in front of a large green plant and a sunny window"></div></div>
+      <div class="rv">
+        <h2>Hi, I'm Justin Gray.</h2>
+        <p class="story">My dad is Deaf, so I've been signing for many years. Now I use sign language to help people understand their Medicare.</p>
+        <p class="story">I'm a trained Medicare agent who just so happens to be ASL certified. You get the full Medicare review, in your language, with time to ask me anything.</p>
+        <ul class="facts">
+          <li><svg width="24" height="24"><use href="#check"/></svg>We meet face to face on Zoom or Google Meet</li>
+          <li><svg width="24" height="24"><use href="#check"/></svg>Have an interpreter? They're welcome to join us</li>
+          <li><svg width="24" height="24"><use href="#check"/></svg>We go at your pace. There is time for every question</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section qual">
+    <div class="wrap">
+      <h2 class="rv">Is this call right for you?</h2>
+      <div class="qual-grid rv">
+        <div class="side yes"><div class="side-core">
+          <h3>This is for you if</h3>
+          <ul>
+            <li><svg width="24" height="24"><use href="#check"/></svg>You have Medicare, or you are turning 65 soon</li>
+            <li><svg width="24" height="24"><use href="#check"/></svg>You would rather talk about it in sign language</li>
+            <li><svg width="24" height="24"><use href="#check"/></svg>Your Medicare Advantage plan is ending in 2027</li>
+            <li><svg width="24" height="24"><use href="#check"/></svg>You want to keep your doctors and your medicines</li>
+          </ul>
+        </div></div>
+        <div class="side no"><div class="side-core">
+          <h3>This is not for you if</h3>
+          <ul>
+            <li><svg width="24" height="24"><use href="#cross"/></svg>You are not on Medicare and not turning 65 soon</li>
+            <li><svg width="24" height="24"><use href="#cross"/></svg>You want a plan picked for the extras alone</li>
+            <li><svg width="24" height="24"><use href="#cross"/></svg>You would rather not look at your doctors and medicines first</li>
+          </ul>
+        </div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="close">
+    <div class="wrap rv">
+      <span class="eyebrow">Two short steps</span>
+      <h2>Let's go through your Medicare <span class="em">in your language.</span></h2>
+      <div class="cta-row">
+        <button class="cta js-open" type="button">Book My Medicare Review<span class="ico"><svg width="22" height="22"><use href="#arrow"/></svg></span></button>
+        <p class="risk"><b>Zoom or Google Meet</b> · In sign language · Bring your own interpreter if you like</p>
+      </div>
+    </div>
+    <footer class="foot">
+      <div class="wrap">
+        <div class="mark"><span class="seal"><svg width="22" height="22"><use href="#hand"/></svg></span><span><b>Justin Gray</b><small>ASL Medicare Agent</small></span></div>
+        <p>Not connected with or endorsed by the U.S. government or the federal Medicare program.</p>
+        <p>&copy; <span id="yr">2026</span> Justin Gray. All rights reserved.</p>
+      </div>
+    </footer>
+  </section>
+</main>
+
+<div class="dock" id="dock" aria-hidden="true"><button class="cta js-open" type="button" tabindex="-1">Book My Medicare Review<span class="ico"><svg width="22" height="22"><use href="#arrow"/></svg></span></button></div>
+
+<dialog id="optin" aria-labelledby="optin-title">
+  <div class="sheet"><div class="sheet-core">
+    <button class="x" type="button" id="closeBtn" aria-label="Close"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
+    <p class="step">Step 1 of 2</p>
+    <h2 id="optin-title">Where should Justin reach you?</h2>
+    <p class="sub">Next, you'll pick a day and time for your call.</p>
+    <form id="form" novalidate>
+      <div class="field"><label for="f-name">Your Full Name</label><input id="f-name" name="name" autocomplete="name" required><p class="err">Please type your name.</p></div>
+      <div class="field"><label for="f-phone">Phone Number (for text messages)</label><input id="f-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required><p class="err">Please type a phone number with 10 digits.</p></div>
+      <div class="field"><label for="f-email">Email Address</label><input id="f-email" name="email" type="email" inputmode="email" autocomplete="email" required><p class="err">Please check your email address.</p></div>
+      <button class="cta" type="submit">Next: Pick a Time<span class="ico"><svg width="22" height="22"><use href="#arrow"/></svg></span></button>
+      <p class="risk">Your details go only to Justin. No spam, ever.</p>
+    </form>
+  </div></div>
+</dialog>
+
+<script>
+/* ============================================================
+   SETTINGS
+   WEBHOOK_URL: paste the GHL inbound webhook (or leave empty).
+   Empty = safe preview mode: the form validates and moves on to
+   the booking page, but nothing is sent anywhere.
+   BOOKING_PAGE: where step 2 lives.
+   ============================================================ */
+const WEBHOOK_URL = '';
+const BOOKING_PAGE = 'book.html';
+
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+/* VSL: a silent captioned preview loops until play; play restarts from 0:00 with sound,
+   tapping the picture pauses, a progress line runs, and the end card offers the CTA */
+const vid = document.getElementById('intro'), player = document.getElementById('player'), prog = document.getElementById('prog');
+const quiet = matchMedia('(prefers-reduced-motion: reduce)').matches || (navigator.connection && navigator.connection.saveData);
+if (quiet) { vid.removeAttribute('autoplay'); vid.pause(); }
+function startVsl() {
+  vid.loop = false; vid.muted = false; vid.currentTime = 0;
+  player.classList.add('playing', 'started'); player.classList.remove('ended', 'paused');
+  vid.play();
+}
+document.getElementById('play').addEventListener('click', startVsl);
+document.getElementById('again').addEventListener('click', startVsl);
+document.getElementById('hold').addEventListener('click', () => { vid.paused ? vid.play() : vid.pause(); });
+vid.addEventListener('pause', () => player.classList.toggle('paused', player.classList.contains('started') && !vid.ended));
+vid.addEventListener('play', () => player.classList.remove('paused'));
+vid.addEventListener('timeupdate', () => { if (player.classList.contains('started') && vid.duration) prog.style.width = (vid.currentTime / vid.duration * 100) + '%'; });
+vid.addEventListener('ended', () => { if (player.classList.contains('started')) player.classList.add('ended'); });
+
+/* form dialog */
+const dlg = document.getElementById('optin'), form = document.getElementById('form');
+document.querySelectorAll('.js-open').forEach(b => b.addEventListener('click', () => {
+  if (player.classList.contains('started') && !vid.paused) vid.pause();
+  dlg.showModal(); setTimeout(() => document.getElementById('f-name').focus(), 60);
+}));
+document.getElementById('closeBtn').addEventListener('click', () => dlg.close());
+dlg.addEventListener('click', e => { if (e.target === dlg) dlg.close(); });
+
+const checks = {
+  name: v => v.trim().length >= 2,
+  phone: v => v.replace(/\D/g, '').length >= 10,
+  email: v => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim())
+};
+form.querySelectorAll('input').forEach(i => i.addEventListener('input', () => i.closest('.field').classList.remove('bad')));
+form.addEventListener('submit', async e => {
+  e.preventDefault();
+  let first = null;
+  for (const [k, ok] of Object.entries(checks)) {
+    const el = form.elements[k], good = ok(el.value);
+    el.closest('.field').classList.toggle('bad', !good);
+    el.setAttribute('aria-invalid', String(!good));
+    if (!good && !first) first = el;
+  }
+  if (first) { first.focus(); return; }
+  const data = { name: form.elements.name.value.trim(), phone: form.elements.phone.value.trim(), email: form.elements.email.value.trim(), source: 'asl-medicare-optin' };
+  const btn = form.querySelector('button[type=submit]'); btn.disabled = true;
+  if (WEBHOOK_URL) {
+    try { await fetch(WEBHOOK_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) }); } catch (err) {}
+  }
+  try { sessionStorage.setItem('jg-first', data.name.split(/\s+/)[0]); } catch (err) {}
+  location.href = BOOKING_PAGE;
+});
+
+/* phone dock: on after the hero CTA scrolls away, off over the closing CTA */
+const dock = document.getElementById('dock'), heroCta = document.querySelector('.hero .cta-row'), closeSec = document.querySelector('.close');
+const dockCheck = () => dock.classList.toggle('on', heroCta.getBoundingClientRect().bottom < 0 && closeSec.getBoundingClientRect().top > innerHeight - 40);
+addEventListener('scroll', dockCheck, { passive: true }); dockCheck();
+
+/* arrival reveals */
+const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .14 });
+document.querySelectorAll('.rv').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
